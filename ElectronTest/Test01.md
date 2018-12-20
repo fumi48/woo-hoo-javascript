@@ -41,8 +41,35 @@ app.on('activate', () => {
 ### BrowserWindowのプロパティ
 
 
-### icp通信
+### icp通信(プロセス間通信)
+```javascript
+//Main
+const ipcMain = require("electron").ipcMain;
+//非同期
+ipcMain.on("async-message", (event, arg) => {
+    event.sender.send("async-res", "hoo!");
+});
+//同期
+ipcMain.on("sync-message", (event, arg) => {
+    event.returnValue = "hoo!";
+});
+```
 
+```javascript
+//Rendarer
+const ipcRendarer = require("electron").ipcRendarer;
+//非同期
+ipcRendarer.send("async-message", "woo!");
+//同期
+ipcRendarer.sendSync("sync-message", "woo!");
+```
+
+### WebContents.send
+```javascript
+current.webContens.on({
+    current.webContents.send("async-message", "woo-hoo!");
+});
+```
 
 ### レンダラ―プロセスでrequireを使う
 ```javascript
