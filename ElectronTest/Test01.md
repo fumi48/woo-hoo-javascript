@@ -54,6 +54,14 @@ var mainWindow = new BrowserWindow({
 ```
 
 ### レンダラ―プロセスでjQueryを使う
+- jQueryをrequireして使う。(npm i jqueryしとく)
+```HTML
+<script>
+window.jQUery = window.$ = require("jQUery");
+</script>
+```
+
+- nodeIntegrationをfalseにする。※requireが使えない！
 ```javascript
 var mainWindow = new BrowserWindow({
     webPreferences: {
@@ -62,6 +70,7 @@ var mainWindow = new BrowserWindow({
 });
 ```
 
+- jQueryを読み込む前にnodeRequireに避難して消しとく。
 ```HTML
 <head>
 <script>
