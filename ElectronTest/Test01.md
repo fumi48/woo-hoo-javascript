@@ -47,8 +47,29 @@ app.on('activate', () => {
 ### レンダラ―プロセスでrequireを使う
 ```javascript
 var mainWindow = new BrowserWindow({
-    webPreference: {
+    webPreferences: {
         nodeIntegration : true
     }
 });
+```
+
+### レンダラ―プロセスでjQueryを使う
+```javascript
+var mainWindow = new BrowserWindow({
+    webPreferences: {
+        nodeIntegration : false
+    }
+});
+```
+
+```HTML
+<head>
+<script>
+window.nodeRequire = require;
+delete window.require;
+delete window.exports;
+delete window.module;
+</script>
+<script type="text/javascript" src="jquery.js"></script>
+</head>
 ```
